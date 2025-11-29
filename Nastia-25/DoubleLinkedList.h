@@ -300,6 +300,23 @@ template<typename Type>
 inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeDuplicates()
 {
 	if (this->count < 2) return *this;
+	Node* curr = head;
+	while (curr != nullptr)
+	{
+		while (curr->next != nullptr && curr->next->value == curr->value)
+		{
+			Node* victim = curr->next;
+			curr->next = victim->next;
+			if (curr->next != nullptr)
+			{
+				victim->next = nullptr;
+				curr->next->prev = curr;
+			}
+			else tail = curr;
+			delete victim;
+		}
+		curr = curr->next;
+	}
 	return *this;
 }
 

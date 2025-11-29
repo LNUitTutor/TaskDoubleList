@@ -64,8 +64,19 @@ int main()
     fin.close();
     std::cout << "\n  At start Unique = ";
     Unique.printOn(std::cout);
-    std::cout << "\nAfter remd Unique = ";
+    std::cout << "\nAfter uniq Unique = ";
     Unique.unique().printOn(std::cout);
+    std::cout << "\n        or Unique = ";
+    Unique.reversePrintOn(std::cout);
+    std::cout << '\n';
+
+    fin.open("Example.txt");
+    Unique = DoubleLinkedList<int>(fin);
+    fin.close();
+    std::cout << "\n  At start Unique = ";
+    Unique.printOn(std::cout);
+    std::cout << "\nAfter remd Unique = ";
+    Unique.removeDuplicates().printOn(std::cout);
     std::cout << "\n        or Unique = ";
     Unique.reversePrintOn(std::cout);
     std::cout << '\n';
