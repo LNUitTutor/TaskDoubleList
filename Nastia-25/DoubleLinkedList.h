@@ -314,6 +314,7 @@ inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeDuplicates()
 			}
 			else tail = curr;
 			delete victim;
+			--count;
 		}
 		curr = curr->next;
 	}

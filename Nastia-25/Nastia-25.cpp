@@ -75,8 +75,10 @@ int main()
     fin.close();
     std::cout << "\n  At start Unique = ";
     Unique.printOn(std::cout);
+    std::cout << " size = " << Unique.size();
     std::cout << "\nAfter remd Unique = ";
     Unique.removeDuplicates().printOn(std::cout);
+    std::cout << " size = " << Unique.size();
     std::cout << "\n        or Unique = ";
     Unique.reversePrintOn(std::cout);
     std::cout << '\n';
