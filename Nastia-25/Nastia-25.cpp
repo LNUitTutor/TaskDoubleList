@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <string>
 #include "DoubleLinkedList.h"
 
 int main()
@@ -34,4 +35,11 @@ int main()
     {
         std::cout << ex.what() << '\n';
     }
+    std::ifstream fin("Text.txt");
+    DoubleLinkedList<std::string> Text(fin);
+    fin.close();
+    std::cout << "\nThe text in line: ";
+    Text.printOn(std::cout);
+    std::cout << "\n\nThe text in column:\n";
+    Text.forEach([](std::string& s) { std::cout << '\t' << s << '\n'; });
 }

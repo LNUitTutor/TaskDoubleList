@@ -194,3 +194,27 @@ inline void DoubleLinkedList<Type>::reversePrintOn(std::ostream& os) const
 		}
 	}
 }
+
+template<typename Type>
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::forEach(Action act)
+{
+	Node* curr = this->head;
+	while (curr != nullptr)
+	{
+		act(curr->value);
+		curr = curr->next;
+	}
+	return *this;
+}
+
+template<typename Type>
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::forEachReverse(Action act)
+{
+	Node* curr = this->tail;
+	while (curr != nullptr)
+	{
+		act(curr->value);
+		curr = curr->prev;
+	}
+	return *this;
+}
