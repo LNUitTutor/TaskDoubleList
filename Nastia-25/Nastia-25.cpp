@@ -18,6 +18,8 @@ int main()
     List.reversePrintOn(std::cout);
     std::cout << "\n size = " << List.size() << "\n\n";
 
+    DoubleLinkedList<int> Copy(List);
+
     std::cout << "deleted values: " << List.delFirst() << ' ';
     std::cout << List.delFirst() << ' ' << List.delLast() << '\n';
     std::cout << "after deleting List = ";
@@ -25,6 +27,10 @@ int main()
     std::cout << "\n            or List = ";
     List.reversePrintOn(std::cout);
     std::cout << "\n size = " << List.size() << "\n\n";
+
+    std::cout << "After deleting Copy = ";
+    Copy.printOn(std::cout);
+    std::cout << "\n\n";
 
     try
     {
@@ -42,4 +48,14 @@ int main()
     Text.printOn(std::cout);
     std::cout << "\n\nThe text in column:\n";
     Text.forEach([](std::string& s) { std::cout << '\t' << s << '\n'; });
+
+    DoubleLinkedList<double> Net;
+    Net.addLast(3.1).addLast(1.2).addLast(5.3).addLast(4.4).addLast(2.5);
+    std::cout << "\n  At start Net = ";
+    Net.printOn(std::cout);
+    std::cout << "\nAfter sort Net = ";
+    Net.sort().printOn(std::cout);
+    std::cout << "\n        or Net = ";
+    Net.reversePrintOn(std::cout);
+    std::cout << '\n';
 }

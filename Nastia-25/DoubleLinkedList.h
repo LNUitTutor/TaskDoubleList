@@ -196,6 +196,47 @@ inline void DoubleLinkedList<Type>::reversePrintOn(std::ostream& os) const
 }
 
 template<typename Type>
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeDoubles()
+{
+	return *this;
+}
+
+template<typename Type>
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::sort()
+{
+	if (this->count < 2) return *this;
+
+	Node phantom(0, nullptr, head);
+	tail = head;
+	head = head->next;
+	phantom.next->next = nullptr;
+	while (head != nullptr)
+	{
+		Node* curr = &phantom;
+		while (curr->next != nullptr && curr->next->value < head->value)
+			curr = curr->next;
+
+		Node* moved = head;
+		head = head->next;
+		if (curr->next == nullptr)
+		{
+			moved->prev = curr;
+			tail = moved;
+		}
+		else
+		{
+			moved->prev = curr->next->prev;
+			curr->next->prev = moved;
+		}
+		moved->next = curr->next;
+		curr->next = moved;
+	}
+	head = phantom.next;
+	phantom.next = nullptr;
+	return *this;
+}
+
+template<typename Type>
 inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::forEach(Action act)
 {
 	Node* curr = this->head;
