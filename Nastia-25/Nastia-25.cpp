@@ -58,4 +58,15 @@ int main()
     std::cout << "\n        or Net = ";
     Net.reversePrintOn(std::cout);
     std::cout << '\n';
+
+    fin.open("Duplicates.txt");
+    DoubleLinkedList<int> Unique(fin);
+    fin.close();
+    std::cout << "\n  At start Unique = ";
+    Unique.printOn(std::cout);
+    std::cout << "\nAfter remd Unique = ";
+    Unique.unique().printOn(std::cout);
+    std::cout << "\n        or Unique = ";
+    Unique.reversePrintOn(std::cout);
+    std::cout << '\n';
 }

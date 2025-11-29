@@ -28,5 +28,8 @@
     <Text Include="Text.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Duplicates.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

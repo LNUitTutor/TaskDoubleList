@@ -33,12 +33,19 @@ public:
 	void reversePrintOn(std::ostream& os) const;
 	bool isEmpty() const { return count == 0; }
 	unsigned size() const { return count; }
-	DoubleLinkedList& removeDoubles();
+	DoubleLinkedList& unique();
 	DoubleLinkedList& sort();
 
 	typedef void (*Action)(Type& x);
 	DoubleLinkedList& forEach(Action act);
 	DoubleLinkedList& forEachReverse(Action act);
+
+	// case #1
+	// У списку L з кожної групи розташованих підряд рівних елементів залишити лише один
+	DoubleLinkedList& removeDuplicates();
+	/* Видалити зі списку L після кожного елемента Е один елемент, якщо такий елемент існує
+	   і не дорівнює Е */
+	DoubleLinkedList& removeNextAfter(const Type& E);
 };
 
 template<typename Type>
@@ -73,6 +80,7 @@ inline DoubleLinkedList<Type>::DoubleLinkedList(std::ifstream& fin)
 	while (fin >> data)
 	{
 		tail = tail->next = new Node(data, tail);
+		++count;
 	}
 }
 
@@ -196,8 +204,36 @@ inline void DoubleLinkedList<Type>::reversePrintOn(std::ostream& os) const
 }
 
 template<typename Type>
-inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeDoubles()
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::unique()
 {
+	if (this->count < 2) return *this;
+	Node* result = head;
+	tail = head;
+	count = 1;
+	head = head->next;
+	result->next = nullptr;
+	while (head != nullptr)
+	{
+		Node* check = result;
+		while (check != nullptr && check->value != head->value) check = check->next;
+		if (check == nullptr) // head->value is unique
+		{
+			tail->next = head;
+			head->prev = tail;
+			tail = tail->next;
+			head = head->next;
+			tail->next = nullptr;
+			++count;
+		}
+		else
+		{
+			Node* victim = head;
+			head = head->next;
+			victim->next = nullptr;
+			delete victim;
+		}
+	}
+	head = result;
 	return *this;
 }
 
@@ -257,5 +293,19 @@ inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::forEachReverse(Action act
 		act(curr->value);
 		curr = curr->prev;
 	}
+	return *this;
+}
+
+template<typename Type>
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeDuplicates()
+{
+	if (this->count < 2) return *this;
+	return *this;
+}
+
+template<typename Type>
+inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeNextAfter(const Type& E)
+{
+	if (this->count < 2) return *this;
 	return *this;
 }
