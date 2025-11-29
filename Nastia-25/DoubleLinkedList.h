@@ -72,7 +72,7 @@ inline DoubleLinkedList<Type>::DoubleLinkedList(std::ifstream& fin)
 	}
 	while (fin >> data)
 	{
-		tail = tail->next = new Node(curr->value, tail);
+		tail = tail->next = new Node(data, tail);
 	}
 }
 
@@ -115,4 +115,36 @@ inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::addLast(const Type& data)
 	else tail = tail->next = new Node(data, tail);
 	++count;
 	return *this;
+}
+
+template<typename Type>
+inline void DoubleLinkedList<Type>::printOn(std::ostream& os) const
+{
+	if (this->isEmpty()) os << "<Empty List>";
+	else
+	{
+		os << this->head->value;
+		Node* curr = this->head->next;
+		while (curr != nullptr)
+		{
+			os << " -> " << curr->value;
+			curr = curr->next;
+		}
+	}
+}
+
+template<typename Type>
+inline void DoubleLinkedList<Type>::reversePrintOn(std::ostream& os) const
+{
+	if (this->isEmpty()) os << "<Empty List>";
+	else
+	{
+		os << this->tail->value;
+		Node* curr = this->tail->prev;
+		while (curr != nullptr)
+		{
+			os << " <- " << curr->value;
+			curr = curr->prev;
+		}
+	}
 }
