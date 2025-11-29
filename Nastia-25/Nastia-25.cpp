@@ -44,10 +44,20 @@ int main()
     std::ifstream fin("Text.txt");
     DoubleLinkedList<std::string> Text(fin);
     fin.close();
+    DoubleLinkedList<std::string> Phrase;
+    Phrase = Text;
     std::cout << "\nThe text in line: ";
     Text.printOn(std::cout);
     std::cout << "\n\nThe text in column:\n";
     Text.forEach([](std::string& s) { std::cout << '\t' << s << '\n'; });
+    std::cout << "\nThe text after remd: ";
+    Text.removeDuplicates().printOn(std::cout);
+
+    std::cout << "\n\nThe copy text after remAft 'trouble': ";
+    Phrase.removeNextAfter("trouble").printOn(std::cout);
+    std::cout << "\nThe copy text after remd: ";
+    Phrase.removeDuplicates().printOn(std::cout);
+    std::cout << '\n';
 
     DoubleLinkedList<double> Net;
     Net.addLast(3.1).addLast(1.2).addLast(5.3).addLast(4.4).addLast(2.5);

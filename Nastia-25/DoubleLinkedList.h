@@ -325,5 +325,23 @@ template<typename Type>
 inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::removeNextAfter(const Type& E)
 {
 	if (this->count < 2) return *this;
+	Node* curr = head;
+	while (curr != nullptr)
+	{
+		if (curr->value == E && curr->next != nullptr && curr->next->value != E)
+		{
+			Node* victim = curr->next;
+			curr->next = victim->next;
+			if (curr->next != nullptr)
+			{
+				victim->next = nullptr;
+				curr->next->prev = curr;
+			}
+			else tail = curr;
+			delete victim;
+			--count;
+		}
+		curr = curr->next;
+	}
 	return *this;
 }
