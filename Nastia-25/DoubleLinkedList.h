@@ -27,8 +27,8 @@ public:
 	DoubleLinkedList& operator=(const DoubleLinkedList& list);
 	DoubleLinkedList& addFirst(const Type& data);
 	DoubleLinkedList& addLast(const Type& data);
-	Type& delFirst();
-	Type& delLast();
+	Type delFirst();
+	Type delLast();
 	void printOn(std::ostream& os) const;
 	void reversePrintOn(std::ostream& os) const;
 	bool isEmpty() const { return count == 0; }
@@ -115,6 +115,52 @@ inline DoubleLinkedList<Type>& DoubleLinkedList<Type>::addLast(const Type& data)
 	else tail = tail->next = new Node(data, tail);
 	++count;
 	return *this;
+}
+
+template<typename Type>
+inline Type DoubleLinkedList<Type>::delFirst()
+{
+	if (this->isEmpty())
+		throw std::runtime_error("Impossible to remove from empty list");
+	Type data = this->head->value;
+	if (this->count == 1)
+	{
+		delete head;
+		head = tail = nullptr;
+	}
+	else
+	{
+		Node* victim = head;
+		head = head->next;
+		head->prev = nullptr;
+		victim->next = nullptr;
+		delete victim;
+	}
+	--count;
+	return data;
+}
+
+template<typename Type>
+inline Type DoubleLinkedList<Type>::delLast()
+{
+	if (this->isEmpty())
+		throw std::runtime_error("Impossible to remove from empty list");
+	Type data = this->tail->value;
+	if (this->count == 1)
+	{
+		delete tail;
+		head = tail = nullptr;
+	}
+	else
+	{
+		Node* victim = tail;
+		tail = tail->prev;
+		tail->next = nullptr;
+		victim->prev = nullptr;
+		delete victim;
+	}
+	--count;
+	return data;
 }
 
 template<typename Type>
