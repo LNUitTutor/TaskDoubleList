@@ -177,6 +177,7 @@ inline void DoubleLinkedList<Type>::printOn(std::ostream& os) const
 	if (this->isEmpty()) os << "<Empty List>";
 	else
 	{
+		os << "(count: " << count << " body: ";
 		os << this->head->value;
 		Node* curr = this->head->next;
 		while (curr != nullptr)
@@ -184,6 +185,7 @@ inline void DoubleLinkedList<Type>::printOn(std::ostream& os) const
 			os << " -> " << curr->value;
 			curr = curr->next;
 		}
+		os << ')';
 	}
 }
 
@@ -193,6 +195,7 @@ inline void DoubleLinkedList<Type>::reversePrintOn(std::ostream& os) const
 	if (this->isEmpty()) os << "<Empty List>";
 	else
 	{
+		os << "(count: " << count << " body: ";
 		os << this->tail->value;
 		Node* curr = this->tail->prev;
 		while (curr != nullptr)
@@ -200,6 +203,7 @@ inline void DoubleLinkedList<Type>::reversePrintOn(std::ostream& os) const
 			os << " <- " << curr->value;
 			curr = curr->prev;
 		}
+		os << ')';
 	}
 }
 

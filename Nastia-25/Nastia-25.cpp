@@ -32,6 +32,11 @@ int main()
     Copy.printOn(std::cout);
     std::cout << "\n\n";
 
+    Copy.forEach([](int& x) {x *= 2; });
+    std::cout << "After forEach*2 Copy = ";
+    Copy.printOn(std::cout);
+    std::cout << "\n\n";
+
     try
     {
         for (int i = 0; i < 5; ++i)
